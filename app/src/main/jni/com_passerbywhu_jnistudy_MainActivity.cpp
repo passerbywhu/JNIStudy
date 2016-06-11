@@ -60,6 +60,8 @@ static int registerNatives(JNIEnv* env) {
     return JNI_TRUE;
 }
 
+/*虚拟机执行System.loadLibrary("native")后，进入native.so后
+ *会首先执行这个方法，所以我们在这里做注册的动作 */
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
    jint result = -1;
    JNIEnv* env = NULL;
