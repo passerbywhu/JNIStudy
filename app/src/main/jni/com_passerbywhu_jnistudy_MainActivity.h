@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT jstring JNICALL Java_com_passerbywhu_jnistudy_MainActivity_getText
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_passerbywhu_jnistudy_MainActivity
+ * Method:    show
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_passerbywhu_jnistudy_MainActivity_show
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif
