@@ -31,3 +31,46 @@ JNIEXPORT jstring JNICALL Java_com_passerbywhu_jnistudy_MainActivity_show
    }
    return env->NewStringUTF("Show message from JNI !");
 }
+
+JNIEXPORT jstring JNICALL native_get_name
+  (JNIEnv * env, jobject thiz) {
+   return env->NewStringUTF("passerbywhu");
+}
+
+static JNINativeMethod gmethods[] = {
+  {"getName", "()Ljava/lang/String;", (void*)native_get_name},
+};
+
+static int registerNativeMethods(JNIEnv* env, const char* className, JNINativeMethod* gMethods, int numMethods) {
+    jclass clazz;
+    clazz = env->FindClass(className);
+    if (clazz == NULL) {
+        return JNI_FALSE;
+    }
+    if (env->RegisterNatives(clazz, gMethods, numMethods) < 0) {
+        return JNI_FALSE;
+    }
+    return JNI_TRUE;
+}
+
+static int registerNatives(JNIEnv* env) {
+    if (!registerNativeMethods(env, "com/passerbywhu/jnistudy/MainActivity", gmethods, sizeof(gmethods) / sizeof(gmethods[0]))) {
+        return JNI_FALSE;
+    }
+    return JNI_TRUE;
+}
+
+jint JNI_OnLoad(JavaVM* vm, void* reserved) {
+   jint result = -1;
+   JNIEnv* env = NULL;
+   if (vm->GetEnv((void**) &env, JNI_VERSION_1_4)) {
+      goto fail;
+   }
+   //最终调用env->RegisterNatives
+   if (registerNatives(env) != JNI_TRUE) {
+       goto fail;
+   }
+   result = JNI_VERSION_1_4;
+   fail:
+       return result;
+}

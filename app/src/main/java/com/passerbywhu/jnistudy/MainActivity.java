@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
     private native String show();
 
+    //此方法用函数注册方式实现
+    private native String getName();
+
     private void callback() {
         Log.d(TAG, "call back from native");
         throw new NullPointerException();
@@ -29,6 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ((TextView) findViewById(R.id.text)).setText(getText() + "\n" + show());
+        ((TextView) findViewById(R.id.text)).setText(getText() + "\n" + show() + "\n" + getName());
     }
 }

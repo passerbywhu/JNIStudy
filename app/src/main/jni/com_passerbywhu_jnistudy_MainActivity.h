@@ -23,6 +23,15 @@ JNIEXPORT jstring JNICALL Java_com_passerbywhu_jnistudy_MainActivity_getText
 JNIEXPORT jstring JNICALL Java_com_passerbywhu_jnistudy_MainActivity_show
   (JNIEnv *, jobject);
 
+/*
+ * Class:  com_passerbywhu_jnistudy_MainActivity
+ * Method: getName
+ * Signature: ()LJava/lang/String;
+ * 这个方法用函数注册方式实现，所以可以不遵照JNI命名规范。
+ */
+JNIEXPORT jstring JNICALL native_get_name
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif
